@@ -5,7 +5,7 @@ const Navbar = () => {
     <>
       <nav className="container-primary">
         <a class="title-navbar" href="#">
-          Panel de Administracion
+          Otra Cosita Admin
         </a>
       </nav>
     </>
