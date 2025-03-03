@@ -1,41 +1,125 @@
-.header{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 10px 10%;
-    background: rgb(50, 113, 231);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 80;
+/* === Estilos generales del navbar === */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 10%;
+  background: #0f172a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
 }
 
-.logo{
-    color: #fff;
-    font-size: 25px;
-    font-weight: 700;
+.logo {
+  color: #fff;
+  font-size: 25px;
+  font-weight: 700;
+  text-decoration: none;
 }
 
-.navbar a{
-    position: relative;
-    font-size: 18px;
-    color: #fff;
-    font-weight: 500;
-    margin-left: 30px;
+.navbar {
+  display: flex;
+  align-items: center;
 }
 
-.navbar a::before{
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: #fff;
-    transition: .3s;
+.navbar a {
+  position: relative;
+  font-size: 18px;
+  color: #fff;
+  font-weight: 500;
+  margin-left: 30px;
+  text-decoration: none;
 }
 
-.navbar a:hover::before{
-    width: 100%;
+.navbar a::before {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #fff;
+  transition: width 0.3s ease-in-out;
+}
+
+.navbar a:hover::before {
+  width: 100%;
+}
+
+/* === Estilos del botón del menú === */
+.menu-container {
+  position: relative;
+  display: inline-block;
+}
+
+button.menu-button {
+  font-size: 18px;
+  font-weight: 500;
+  margin-left: 30px;
+  background: #1d4ed8;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  padding: 8px 15px;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+button.menu-button:hover {
+  background: #3b82f6;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* === Estilos del menú desplegable === */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
+  padding: 8px 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+  margin-top: 6px;
+  cursor: pointer;
+}
+
+.dropdown-menu a {
+  margin-left: 0; 
+  text-align: center; 
+  display: flex;
+  width: 100%;
+  padding: 12px 20px;
+  color: #333;
+  align-items: center;
+  gap: 3px;
+}
+
+.dropdown-menu a:hover {
+  background: #f3f4f6;
+  border-radius: 5px;
+}
+
+.icon {
+  font-size: 18px;
+  color: #333;
+  
+}
+
+/* === Mostrar el menú cuando está activo === */
+.menu-container.open .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }

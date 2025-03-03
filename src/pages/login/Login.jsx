@@ -8,8 +8,12 @@ import InputBase from "../../components/formik/InputBase.jsx";
 import useAccessLogin from "../../hooks/accessLogin.js";
 import { useDispatch } from "react-redux";
 import { credential } from "../../store/features/authSlice.js";
+import { useState } from "react";
+import ModalError from "../../components/modals/modalError.jsx";
 
 const Login = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const { login } = useAccessLogin();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -22,13 +26,25 @@ const Login = () => {
   const onSubmit = async (values, actions) => {
     try {
       const response = await login(values);
-      console.log("response: ", response);
-      if (response && response.token) {
-        dispatch(credential(response.token));
+      console.log("response: ", JSON.stringify(response, null, 2));
+
+      if (response) {
+        dispatch(
+          credential({
+            userId: response.userId,
+            username: response.username,
+            roles: response.roles,
+          })
+        );
         navigate("/");
+      } else {
+        setErrorMessage(response.message);
+        setModalOpen(true);
       }
     } catch (err) {
       console.error("Error en el login:", err);
+      setErrorMessage("Error en el login. Verifica tus credenciales.");
+      setModalOpen(true);
     }
   };
 
@@ -41,14 +57,14 @@ const Login = () => {
       {({ isSubmitting }) => (
         <div className="wrapper">
           <Form>
-            <h1>Iniciar Sesion</h1>
+            <h1>Otra Cosita</h1>
 
             <div className="input-box">
               <InputBase
                 label="email"
                 name="email"
                 type="text"
-                placeholder="Email"
+                placeholder="Correo electronico"
                 icon={FaAt}
               />
             </div>
@@ -58,26 +74,31 @@ const Login = () => {
                 label="password"
                 name="password"
                 type="password"
-                placeholder="password"
+                placeholder="Contraseña"
                 icon={FaLock}
               />
             </div>
 
             <div className="remember-forgot">
               <label>
-                <input type="checkbox"></input> Remember me
+                <input type="checkbox"></input> Recuerdame
               </label>
-              <a href="#">Forgot password?</a>
             </div>
 
             <button disabled={isSubmitting} type="submit" className="submit">
-              Login
+              Iniciar Sesíon
             </button>
 
             <div className="register-link">
-              <p>
-                Don't have an account? <a href="/register">Register</a>
-              </p>
+              <a href="#">Olvidaste tu contraseña?</a>
+            </div>
+
+            <div>
+              <ModalError
+                isOpen={modalOpen}
+                onClose={() => setModalOpen(false)}
+                message={errorMessage}
+              />
             </div>
           </Form>
         </div>

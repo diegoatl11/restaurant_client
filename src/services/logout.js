@@ -1,19 +1,16 @@
-import endpoints from "../endpoints";
+import endpoints from "../components/endpoints";
 
-
-export const getAccessLogin = async (request) => {
+export const logoutSession = async () => {
     const options = {
         method: 'POST',
-        url: `${endpoints.LOGIN}`,
+        url: `${endpoints.LOGOUT}`,
         credentials: "include",
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json'
         },
-        body: JSON.stringify(request),
     };
     try {
         const response = await fetch(options.url, options);
-        console.log("Status:", response.status);
         const res = await response.json();
         return { status: response.status, ...res };
     } catch (e) {
