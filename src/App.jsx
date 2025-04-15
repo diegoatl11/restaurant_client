@@ -4,7 +4,7 @@ import Register from "./pages/login/Register.jsx";
 import { useEffect } from "react";
 import { Route, Routes } from "react-router";
 import { useDispatch } from "react-redux";
-import { getUserInfo } from "./services/getUserInfo.js";
+import { accessUser } from "./services/accessUser.js";
 import { userInfo, logout } from "./store/features/authSlice.js";
 import RoleProtectedRoute from "./components/RoleProtectedRoute.jsx";
 import "./styles/App.css";
@@ -17,7 +17,7 @@ function App() {
     const verifySession = async () => {
       try {
 
-        const response = await getUserInfo();
+        const response = await accessUser();
         if (response.status === 200) {
           dispatch(
             userInfo({

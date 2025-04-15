@@ -1,7 +1,7 @@
 import endpoints from "../components/endpoints";
 
 
-export const getUserInfo = async () => {
+export const accessUser = async () => {
     const options = {
         method: 'GET',
         url: `${endpoints.USERINFO}`,
