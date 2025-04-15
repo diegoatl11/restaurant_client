@@ -32,6 +32,7 @@ const Navbar = () => {
         Otra Cosita
       </a>
       <nav className="navbar">
+        <a href="/register">Registro</a>
         <a href="#">Contacto</a>
         {isAuthenticated ? (
           <div className={`menu-container ${menuOpen ? "open" : ""}`}>

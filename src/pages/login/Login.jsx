@@ -5,16 +5,15 @@ import { FaLock, FaAt } from "react-icons/fa";
 import { Formik, Form } from "formik";
 import { loginSchema } from "../../schemas/shemas.js";
 import InputBase from "../../components/formik/InputBase.jsx";
-import useAccessLogin from "../../hooks/accessLogin.js";
 import { useDispatch } from "react-redux";
-import { credential } from "../../store/features/authSlice.js";
+import { login } from "../../store/features/authSlice.js";
 import { useState } from "react";
 import ModalError from "../../components/modals/modalError.jsx";
+import { accessLogin } from "../../services/accessLogin.js";
 
 const Login = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const { login } = useAccessLogin();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -25,12 +24,10 @@ const Login = () => {
 
   const onSubmit = async (values, actions) => {
     try {
-      const response = await login(values);
-      console.log("response: ", JSON.stringify(response, null, 2));
-
-      if (response) {
+      const response = await accessLogin(values);
+      if (response.status == 200 ) {
         dispatch(
-          credential({
+          login({
             userId: response.userId,
             username: response.username,
             roles: response.roles,

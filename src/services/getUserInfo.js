@@ -11,7 +11,6 @@ export const getUserInfo = async () => {
         },
     };
     try {
-        console.log('sassasas')
         const response = await fetch(options.url, options);
         const res = await response.json();
         return { status: response.status, ...res };

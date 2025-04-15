@@ -1,7 +1,7 @@
-import endpoints from "../endpoints";
+import endpoints from "../components/endpoints";
 
 
-export const getAccessLogin = async (request) => {
+export const accessLogin = async (request) => {
     const options = {
         method: 'POST',
         url: `${endpoints.LOGIN}`,
