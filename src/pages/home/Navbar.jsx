@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../store/features/authSlice";
-import "../../styles/navbar/Navbar.css";
+import "../../styles/navbar/navbar.css";
 import { MdSettings } from "react-icons/md";
 import { IoLogOut } from "react-icons/io5";
 import { logoutSession } from "../../services/logout";
